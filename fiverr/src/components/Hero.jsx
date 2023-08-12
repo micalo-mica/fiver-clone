@@ -26,6 +26,7 @@ const HContainer = styled.div`
   margin: 0px auto;
   display: flex;
   align-items: center;
+  gap: 2rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -165,6 +166,9 @@ const SearchBtn = styled.button`
   }
 `;
 const Right = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100%;
   padding: 0.5rem 0rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
@@ -180,7 +184,7 @@ const Right = styled.div`
   }
 `;
 const Image = styled.img`
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
   border-radius: 1rem;
   object-fit: contain;
@@ -202,10 +206,7 @@ function Hero() {
     <H>
       <HContainer>
         <Left>
-          <Text>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat,
-            dignissimos.
-          </Text>
+          <Text>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</Text>
           <InputContainer>
             <SearchContainer>
               <SearchIcon />
