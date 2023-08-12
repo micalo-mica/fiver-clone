@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
-// import { useGlobalContext } from "../context/HeaderContext";
+import Pro from "../assets/pro.jpg";
 import { useGlobalContext } from "../context/HeaderContext";
 
 const N = styled.div`
@@ -13,7 +13,8 @@ const N = styled.div`
   /* -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38); */
-  padding: 0.7rem 0rem;
+  /* padding: 0.7rem 0rem; */
+  height: 4rem;
   position: sticky;
   top: 0;
   right: 0;
@@ -34,6 +35,7 @@ const N = styled.div`
   }
 `;
 const NavbarContainer = styled.div`
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -173,6 +175,77 @@ const JoinBtn = styled.button`
   }
 `;
 
+const Profile = styled.img`
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+
+// profile options
+const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* position: relative; */
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const ProfileOptions = styled.div`
+  position: absolute;
+  right: 5px;
+  top: 65px;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const Options = styled.span`
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+
 const ToggleContainer = styled.div`
   color: white;
   background-color: #1dbf73;
@@ -212,6 +285,12 @@ function Navbar() {
     }
   };
 
+  const currentUser = {
+    id: 1,
+    userName: "Micah",
+    isSeller: true,
+  };
+
   return (
     <N onMouseOver={handleSubmenu}>
       <NavbarContainer>
@@ -222,12 +301,12 @@ function Navbar() {
           <ListItems>
             <ListItem>
               <LinkButton className="link-btn" onMouseOver={displaySubmenu}>
-                house for rent
+                category
               </LinkButton>
             </ListItem>
             <ListItem>
               <LinkButton className="link-btn" onMouseOver={displaySubmenu}>
-                house for sell
+                explore
               </LinkButton>
             </ListItem>
             <ListItem>
@@ -238,9 +317,18 @@ function Navbar() {
           </ListItems>
         </Center>
         <RightLinks>
-          <LinkT>sell</LinkT>
-          <LinkT>profile</LinkT>
-          <JoinBtn>join</JoinBtn>
+          {!currentUser.isSeller && <LinkT>Sell</LinkT>}
+          {!currentUser && <JoinBtn>join</JoinBtn>}
+          <ProfileContainer>
+            <Profile src={Pro} />
+            <ProfileOptions>
+              <Options>Gigs</Options>
+              <Options>Add New Gig</Options>
+              <Options>Orders</Options>
+              <Options>Messages</Options>
+              <Options>Logout</Options>
+            </ProfileOptions>
+          </ProfileContainer>
           <ToggleContainer onClick={openSidebar}>
             <AiOutlineMenu />
           </ToggleContainer>

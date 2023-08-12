@@ -1,26 +1,27 @@
 export const sublinks = [
   {
-    page: "house for rent",
+    page: "category",
     links: [
-      { label: "payment", url: "/products" },
-      { label: "terminal", url: "/products" },
-      { label: "connect", url: "/products" },
+      { label: "programming", url: "/products" },
+      { label: "designing", url: "/products" },
+      { label: "tech", url: "/products" },
     ],
   },
   {
-    page: "house for sell",
+    page: "explore",
     links: [
-      { label: "plugins", url: "/products" },
+      { label: "sell", url: "/products" },
       { label: "libraries", url: "/products" },
-      { label: "help", url: "/products" },
       { label: "billing", url: "/products" },
     ],
   },
   {
     page: "company",
     links: [
+      { label: "help", url: "/products" },
       { label: "about", url: "/products" },
       { label: "customers", url: "/products" },
+      { label: "FQR", url: "/products" },
     ],
   },
 ];

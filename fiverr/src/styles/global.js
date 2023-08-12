@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
   scroll-behavior: smooth;
   text-decoration: none;
   list-style: none;
+  color: inherit; 
 }
 
   body {
