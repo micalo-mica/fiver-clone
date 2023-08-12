@@ -4,6 +4,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
 import Pro from "../assets/pro.jpg";
 import { useGlobalContext } from "../context/HeaderContext";
+import { useState } from "react";
 
 const N = styled.div`
   /* height: ${(prop) => (prop.type === "big" ? "21.2rem" : "21.5rem")};
@@ -270,6 +271,7 @@ const ToggleContainer = styled.div`
 
 function Navbar() {
   const { openSidebar, openSubmenu, closeSubmenu } = useGlobalContext();
+  const [open, setOpen] = useState(false);
 
   const displaySubmenu = (e) => {
     const page = e.target.textContent;
@@ -320,14 +322,21 @@ function Navbar() {
           {!currentUser.isSeller && <LinkT>Sell</LinkT>}
           {!currentUser && <JoinBtn>join</JoinBtn>}
           <ProfileContainer>
-            <Profile src={Pro} />
-            <ProfileOptions>
-              <Options>Gigs</Options>
-              <Options>Add New Gig</Options>
-              <Options>Orders</Options>
-              <Options>Messages</Options>
-              <Options>Logout</Options>
-            </ProfileOptions>
+            <Profile src={Pro} onClick={() => setOpen(!open)} />
+            {open && (
+              <ProfileOptions>
+                {currentUser.isSeller && (
+                  <>
+                    <Options>Gigs</Options>
+                    <Options>Add New Gig</Options>
+                  </>
+                )}
+
+                <Options>Orders</Options>
+                <Options>Messages</Options>
+                <Options>Logout</Options>
+              </ProfileOptions>
+            )}
           </ProfileContainer>
           <ToggleContainer onClick={openSidebar}>
             <AiOutlineMenu />
