@@ -53,6 +53,8 @@ const Top = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2.5rem;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
@@ -70,6 +72,7 @@ const Items = styled.div`
   }
 `;
 const ItemHeaderText = styled.h2`
+  margin-bottom: 1rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -180,7 +183,7 @@ function Footer() {
               const { category, link } = item;
               return (
                 <Items key={index}>
-                  <ItemHeaderText key={index}>{category}</ItemHeaderText>;
+                  <ItemHeaderText key={index}>{category}</ItemHeaderText>
                   <LinksContainer>
                     {link.map((i, index) => {
                       const { name, link } = i;
