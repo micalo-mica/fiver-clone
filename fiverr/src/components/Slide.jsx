@@ -6,10 +6,8 @@ import SliderCard from "./SliderCard";
 import { projects } from "../static/sli";
 
 const S = styled.div`
-  -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
-  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
-  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
   padding-top: 2rem;
+  z-index: 1;
 `;
 
 const Slide = ({ images }) => {

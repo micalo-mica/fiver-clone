@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import Hero from "../components/Hero";
-// import Trusted from "../components/SliderCard";
+
 import Slide from "../components/Slide";
+import GigCards from "../components/GigCards";
 
 const H = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
@@ -21,6 +22,7 @@ function Home() {
     <H>
       <Hero />
       <Slide />
+      <GigCards />
     </H>
   );
 }

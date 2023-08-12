@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { AiOutlineMenu } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
-import Pro from "../assets/pro.jpg";
+import Pro from "../assets/pro.png";
 import { useGlobalContext } from "../context/HeaderContext";
 import { useState } from "react";
 
@@ -20,6 +20,7 @@ const N = styled.div`
   top: 0;
   right: 0;
   width: 100%;
+  z-index: 99;
   @media (max-width: ${({ theme }) => theme.screens.xl}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.lg2}) {
