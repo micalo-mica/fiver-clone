@@ -16,7 +16,7 @@ const G = styled.div`
 `;
 
 const Image = styled.img`
-  width: 23rem;
+  width: 22rem;
   height: 17rem;
   border-radius: 0.4rem;
   -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
@@ -29,6 +29,7 @@ const Image = styled.img`
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    width: 95vw;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }

@@ -16,6 +16,25 @@ const G = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
+
+const Text = styled.h2`
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  font-weight: bold;
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+
 const GContainer = styled.div`
   width: 100%;
   max-width: ${({ theme }) => theme.sizes.widthLg};
@@ -30,6 +49,9 @@ const GContainer = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    max-width: ${({ theme }) => theme.sizes.widthLgPhone};
+    grid-template-columns: 1fr;
+    column-gap: 0rem;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
@@ -38,6 +60,7 @@ const GContainer = styled.div`
 function GigCards() {
   return (
     <G>
+      <Text>Select and buy </Text>
       <GContainer>
         {projects && projects.map((g) => <GigCard key={g.id} g={g} />)}
       </GContainer>
