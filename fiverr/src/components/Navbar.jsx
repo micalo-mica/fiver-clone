@@ -297,7 +297,9 @@ function Navbar() {
     <N onMouseOver={handleSubmenu}>
       <NavbarContainer>
         <Logo>
-          <LogoText>Fiver-clone</LogoText>
+          <Link to="/">
+            <LogoText>Fiver-clone</LogoText>
+          </Link>
         </Logo>
         <Center>
           <ListItems>
@@ -327,14 +329,25 @@ function Navbar() {
               <ProfileOptions>
                 {currentUser.isSeller && (
                   <>
-                    <Options>Gigs</Options>
-                    <Options>Add New Gig</Options>
+                    <Link to="/mygigs">
+                      <Options>Gigs</Options>
+                    </Link>
+                    <Link to="/add">
+                      <Options>Add New Gig</Options>
+                    </Link>
                   </>
                 )}
-
-                <Options>Orders</Options>
-                <Options>Messages</Options>
-                <Options>Logout</Options>
+                <Link to="/orders">
+                  <Options>Orders</Options>
+                </Link>
+                <Link to="/messages">
+                  <Options>Messages</Options>
+                </Link>
+                <Link
+                // onClick={handleLogout}
+                >
+                  <Options>Logout</Options>
+                </Link>
               </ProfileOptions>
             )}
           </ProfileContainer>
