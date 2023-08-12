@@ -1,7 +1,25 @@
-import React from "react";
+import styled from "styled-components";
+import Hero from "../components/Hero";
+
+const H = styled.div`
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
 
 function Home() {
-  return <div>Home</div>;
+  return (
+    <H>
+      <Hero />
+    </H>
+  );
 }
 
 export default Home;
