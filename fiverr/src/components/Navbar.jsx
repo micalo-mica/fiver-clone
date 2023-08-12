@@ -7,18 +7,11 @@ import { useGlobalContext } from "../context/HeaderContext";
 import { useState } from "react";
 
 const N = styled.div`
-  /* height: ${(prop) => (prop.type === "big" ? "21.2rem" : "21.5rem")};
-  width: ${(prop) => (prop.type === "big" ? "19.9rem" : "21.9rem")}; */
   background-color: ${({ theme }) => theme.colors.hero};
-  /* color: ${({ theme }) => theme.colors.black}; */
-  /* -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
-  -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
-  box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38); */
-  /* padding: 0.7rem 0rem; */
   height: 4rem;
   position: sticky;
   top: 0;
-  right: 0;
+
   width: 100%;
   z-index: 99;
   @media (max-width: ${({ theme }) => theme.screens.xl}) {

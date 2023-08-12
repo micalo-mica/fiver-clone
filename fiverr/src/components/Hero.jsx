@@ -3,7 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import HorImg from "../assets/mman.png";
 
 const H = styled.div`
-  width: 100vw;
+  width: 100%;
   height: calc(80vh - 4rem);
   display: flex;
   justify-content: center;

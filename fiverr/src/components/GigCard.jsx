@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Pro from "../assets/pro.png";
 
 const G = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 1.6rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
