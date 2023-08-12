@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
-import HorImg from "../assets/heroImg.jpg";
+import HorImg from "../assets/mman.png";
 
 const H = styled.div`
   width: 100vw;

@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import Hero from "../components/Hero";
-import Trusted from "../components/Trusted";
 
-const H = styled.div`
+const S = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -15,13 +13,8 @@ const H = styled.div`
   }
 `;
 
-function Home() {
-  return (
-    <H>
-      <Hero />
-      <Trusted />
-    </H>
-  );
+function SliderCard() {
+  return <S>Trusted</S>;
 }
 
-export default Home;
+export default SliderCard;
