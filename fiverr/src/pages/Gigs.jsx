@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { BsFilterLeft } from "react-icons/bs";
 import { AiOutlineDown } from "react-icons/ai";
+import { useState } from "react";
+import { projects } from "../static/sli";
+import GigCard from "../components/GigCard";
 
 const G = styled.div`
   width: 100%;
@@ -19,6 +22,9 @@ const Container = styled.div`
   width: 100%;
   max-width: ${({ theme }) => theme.sizes.widthLg};
   margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -30,7 +36,10 @@ const Container = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
-const CategoryTitle = styled.h2`
+const CategoryTitle = styled.h3`
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 1rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -43,6 +52,8 @@ const CategoryTitle = styled.h2`
   }
 `;
 const CategoryText = styled.p`
+  font-size: 1rem;
+  font-weight: 400;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -56,6 +67,10 @@ const CategoryText = styled.p`
 `;
 
 const FilterContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -67,16 +82,21 @@ const FilterContainer = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
-const FilterIcon = styled(BsFilterLeft)``;
-const DownIcon = styled(AiOutlineDown)``;
+const FilterIcon = styled(BsFilterLeft)`
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+`;
+const DownIcon = styled(AiOutlineDown)`
+  cursor: pointer;
+`;
 
 const Left = styled.div`
-  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
-  }
-  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
-  }
-`;
-const Right = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #555;
+  font-weight: 300;
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
@@ -84,6 +104,13 @@ const Right = styled.div`
 `;
 
 const Input = styled.input`
+  padding: 0.3rem;
+  border: 1px solid lightgrey;
+  border-radius: 0.3rem;
+  outline: none;
+  &::placeholder {
+    color: #999;
+  }
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -96,6 +123,13 @@ const Input = styled.input`
   }
 `;
 const Button = styled.button`
+  padding: 0.3rem 0.5rem;
+  background-color: #1dbf73;
+  color: white;
+  border: none;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -107,7 +141,22 @@ const Button = styled.button`
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
+
+// right
+const Right = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+
 const SortBy = styled.span`
+  color: #555;
+  font-weight: 300;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -120,6 +169,7 @@ const SortBy = styled.span`
   }
 `;
 const SortType = styled.span`
+  font-weight: 500;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -132,6 +182,18 @@ const SortType = styled.span`
   }
 `;
 const DropDown = styled.div`
+  padding: 1rem;
+  background-color: white;
+  border: 0.5px solid lightgrey;
+  border-radius: 0.3rem;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #555;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -144,6 +206,21 @@ const DropDown = styled.div`
   }
 `;
 const SpanSort = styled.span`
+  cursor: pointer;
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+
+// cards
+const Cards = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -157,11 +234,20 @@ const SpanSort = styled.span`
 `;
 
 function Gigs() {
+  const [open, setOpen] = useState(false);
+  const [sort, setSort] = useState("sales");
+
+  const reSort = (type) => {
+    setSort(type);
+    setOpen(false);
+  };
+
   return (
     <G>
       <Container>
-        <CategoryTitle>Gigs</CategoryTitle>
-        <CategoryText>Gigs</CategoryText>
+        <CategoryTitle>Dis</CategoryTitle>
+        <CategoryText>Liverr Graphics & Design </CategoryText>
+        {/* filter */}
         <FilterContainer>
           <Left>
             <FilterIcon />
@@ -171,14 +257,26 @@ function Gigs() {
           </Left>
           <Right>
             <SortBy>Sort By</SortBy>
-            <SortType>Best Selling</SortType>
-            <DownIcon />
-            <DropDown>
-              <SpanSort>Newest</SpanSort>
-              <SpanSort>Best Selling</SpanSort>
-            </DropDown>
+            <SortType>{sort === "sales" ? "Best Selling" : "Newest"}</SortType>
+            <DownIcon onClick={() => setOpen(!open)} />
+            {open && (
+              <DropDown>
+                {sort === "sales" ? (
+                  <SpanSort onClick={() => reSort("createdAt")}>
+                    Newest
+                  </SpanSort>
+                ) : (
+                  <SpanSort onClick={() => reSort("sales")}>
+                    Best Selling
+                  </SpanSort>
+                )}
+              </DropDown>
+            )}
           </Right>
         </FilterContainer>
+        <Cards>
+          {projects && projects.map((g) => <GigCard key={g.id} g={g} />)}
+        </Cards>
       </Container>
     </G>
   );

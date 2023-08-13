@@ -4,6 +4,7 @@ import { AiFillStar, AiFillHeart } from "react-icons/ai";
 
 const G = styled.div`
   margin-bottom: 1.6rem;
+  width: 22rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -17,7 +18,8 @@ const G = styled.div`
 `;
 
 const Image = styled.img`
-  width: 22rem;
+  /* width: 22rem; */
+  width: 100%;
   height: 17rem;
   border-radius: 0.4rem;
   -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
