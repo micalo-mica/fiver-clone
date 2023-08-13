@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { projects } from "../static/sli";
 import { AiFillStar, AiFillHeart } from "react-icons/ai";
+import UseableSlid from "../components/UseableSlid";
 
 const G = styled.div`
   width: 100%;
@@ -71,6 +72,32 @@ const UserImg = styled.img`
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
+const SliderContainer = styled.div`
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const Image = styled.img`
+  height: 20rem;
+  width: 20rem;
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
 const UserName = styled.h4`
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
@@ -118,12 +145,22 @@ function Gig() {
           {/* user */}
           <UserContainer>
             <UserImg />
-            <UserName></UserName>
+            <UserName>Micah</UserName>
             <StarContainer>
               <StarIcon />
             </StarContainer>
           </UserContainer>
           {/* slider */}
+          {/* <SliderContainer> */}
+          <UseableSlid slidesToShow="1" arrowsScroll="1">
+            {projects &&
+              projects.map((project) => (
+                <SliderContainer key={project.id}>
+                  <Image src={project.img} />
+                </SliderContainer>
+              ))}
+          </UseableSlid>
+          {/* </SliderContainer> */}
         </Left>
         <Right></Right>
       </Container>

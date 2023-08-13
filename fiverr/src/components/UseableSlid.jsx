@@ -1,16 +1,13 @@
 import styled from "styled-components";
 import { useState } from "react";
 import ReactSimplyCarousel from "react-simply-carousel";
-import PropertyDetailCard from "../../../../Aztech/client/src/components/forPropertyDetail/PropertyDetailCard";
-import SliderCard from "./SliderCard";
-import { projects } from "../static/sli";
 
 const S = styled.div`
   padding-top: 2rem;
   z-index: 1;
 `;
 
-const UseableSlid = ({ children }) => {
+const UseableSlid = ({ children, slidesToShow, arrowsScroll }) => {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
   return (
     <S>
@@ -57,8 +54,8 @@ const UseableSlid = ({ children }) => {
         }}
         responsiveProps={[
           {
-            itemsToShow: 5,
-            itemsToScroll: 5,
+            itemsToShow: slidesToShow,
+            itemsToScroll: arrowsScroll,
             minWidth: 768,
           },
         ]}
