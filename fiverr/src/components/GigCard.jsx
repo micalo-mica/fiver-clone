@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Pro from "../assets/pro.png";
 import { AiFillStar, AiFillHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const G = styled.div`
   margin-bottom: 1.6rem;
@@ -258,42 +259,45 @@ const StarIcon = styled(AiFillStar)`
 function GigCard({ g }) {
   return (
     <G>
-      <Image src={g.img} />
-      <TextContainer>
-        <Top>
-          <TopContainer>
-            <ProfileImg src={Pro} />
-            <NameContainer>
-              <Name>{g.username}</Name>
-              <Cat>{g.cat}</Cat>
-            </NameContainer>
-          </TopContainer>
-          <Price>$ 300050</Price>
-        </Top>
-        <Down>
-          <Description>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A, aliquam.
-          </Description>
-          <IconsContainers>
-            {/* begin */}
-            <AIconContainer>
-              <IconContainer>
-                <LikeIcon />
-              </IconContainer>
-              <IconNumb>123</IconNumb>
-            </AIconContainer>
-            {/* end */}
-            {/* begin */}
-            <AIconContainer>
-              <IconContainer>
-                <StarIcon />
-              </IconContainer>
-              <IconNumb>123</IconNumb>
-            </AIconContainer>
-            {/* end */}
-          </IconsContainers>
-        </Down>
-      </TextContainer>
+      <Link to={`/gig/${g.id}`}>
+        <Image src={g.img} />
+        <TextContainer>
+          <Top>
+            <TopContainer>
+              <ProfileImg src={Pro} />
+              <NameContainer>
+                <Name>{g.username}</Name>
+                <Cat>{g.cat}</Cat>
+              </NameContainer>
+            </TopContainer>
+            <Price>$ 300050</Price>
+          </Top>
+          <Down>
+            <Description>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. A,
+              aliquam.
+            </Description>
+            <IconsContainers>
+              {/* begin */}
+              <AIconContainer>
+                <IconContainer>
+                  <LikeIcon />
+                </IconContainer>
+                <IconNumb>123</IconNumb>
+              </AIconContainer>
+              {/* end */}
+              {/* begin */}
+              <AIconContainer>
+                <IconContainer>
+                  <StarIcon />
+                </IconContainer>
+                <IconNumb>123</IconNumb>
+              </AIconContainer>
+              {/* end */}
+            </IconsContainers>
+          </Down>
+        </TextContainer>
+      </Link>
     </G>
   );
 }
