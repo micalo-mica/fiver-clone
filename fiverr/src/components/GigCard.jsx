@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Pro from "../assets/pro.png";
+import { AiFillStar, AiFillHeart } from "react-icons/ai";
 
 const G = styled.div`
   margin-bottom: 1.6rem;
@@ -163,7 +164,83 @@ const Down = styled.div`
 `;
 const Description = styled.p`
   font-size: 1rem;
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
 
+//icons
+const IconsContainers = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const AIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const IconContainer = styled.div`
+  font-size: 1.5rem;
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const IconNumb = styled.span`
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const LikeIcon = styled(AiFillHeart)`
+  color: red;
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const StarIcon = styled(AiFillStar)`
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -195,6 +272,24 @@ function GigCard({ g }) {
           <Description>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. A, aliquam.
           </Description>
+          <IconsContainers>
+            {/* begin */}
+            <AIconContainer>
+              <IconContainer>
+                <LikeIcon />
+              </IconContainer>
+              <IconNumb>123</IconNumb>
+            </AIconContainer>
+            {/* end */}
+            {/* begin */}
+            <AIconContainer>
+              <IconContainer>
+                <StarIcon />
+              </IconContainer>
+              <IconNumb>123</IconNumb>
+            </AIconContainer>
+            {/* end */}
+          </IconsContainers>
         </Down>
       </TextContainer>
     </G>
