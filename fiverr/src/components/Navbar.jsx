@@ -11,7 +11,6 @@ const N = styled.div`
   height: 4rem;
   position: sticky;
   top: 0;
-
   width: 100%;
   z-index: 99;
   @media (max-width: ${({ theme }) => theme.screens.xl}) {
