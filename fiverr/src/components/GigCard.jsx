@@ -12,6 +12,7 @@ const G = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    width: 25.5rem;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
@@ -32,7 +33,6 @@ const Image = styled.img`
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
-    width: 95vw;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }

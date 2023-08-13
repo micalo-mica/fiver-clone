@@ -32,6 +32,8 @@ const Container = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    max-width: ${({ theme }) => theme.sizes.widthLgPhone};
+    column-gap: 0rem;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
@@ -78,6 +80,8 @@ const FilterContainer = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    flex-direction: column;
+    gap: 1rem;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
@@ -98,7 +102,9 @@ const Left = styled.div`
   color: #555;
   font-weight: 300;
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    flex-direction: column;
   }
+
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
@@ -221,6 +227,9 @@ const SpanSort = styled.span`
 
 // cards
 const Cards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -228,6 +237,7 @@ const Cards = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    grid-template-columns: 1fr;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
