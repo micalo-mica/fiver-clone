@@ -10,10 +10,9 @@ import UseableSlid from "../components/UseableSlid";
 import Pro from "../assets/pro.png";
 
 const G = styled.div`
-  display: flex;
-  justify-content: center;
   width: 100%;
   padding-top: 1rem;
+  padding-bottom: 3rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -30,16 +29,14 @@ const Container = styled.div`
   width: 100%;
   max-width: ${({ theme }) => theme.sizes.widthLg};
   margin: 0px auto;
-  /* width: 1400px;
-  padding: 30px 0px; */
   display: flex;
   gap: 3rem;
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
     max-width: ${({ theme }) => theme.sizes.widthLgPhone};
-    grid-template-columns: 1fr;
-    column-gap: 0rem;
+    flex-direction: column;
+    gap: 0rem;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
@@ -58,6 +55,7 @@ const Left = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    flex: 0;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
@@ -124,24 +122,25 @@ const UserStarNumb = styled.span``;
 
 // slider
 const SliderContainers = styled.div`
-  /* padding: 0.5rem; */
-  /* width: max-content; */
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
 const SliderContainer = styled.div`
+  height: 29rem;
+  width: 29rem;
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    height: 20rem;
+    width: 20rem;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
 const Image = styled.img`
-  height: 29rem;
-  width: 29rem;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -501,6 +500,7 @@ const Right = styled.div`
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    flex: 0;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
