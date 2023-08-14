@@ -13,6 +13,7 @@ const G = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  padding-top: 1rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -29,10 +30,10 @@ const Container = styled.div`
   width: 100%;
   max-width: ${({ theme }) => theme.sizes.widthLg};
   margin: 0px auto;
-  width: 1400px;
-  padding: 30px 0px;
+  /* width: 1400px;
+  padding: 30px 0px; */
   display: flex;
-  gap: 50px;
+  gap: 3rem;
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
@@ -49,7 +50,7 @@ const Left = styled.div`
   flex: 2;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0.5rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -125,25 +126,12 @@ const UserStarNumb = styled.span``;
 const SliderContainers = styled.div`
   /* padding: 0.5rem; */
   /* width: max-content; */
-
-  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
-  }
-  @media (max-width: ${({ theme }) => theme.screens.md}) {
-  }
-  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
-  }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
 const SliderContainer = styled.div`
-  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
-  }
-  @media (max-width: ${({ theme }) => theme.screens.md}) {
-  }
-  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
-  }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
@@ -496,12 +484,83 @@ const Hr = styled.hr`
 // right
 const Right = styled.div`
   flex: 1;
+  border: 1px solid lightgray;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: max-content;
+  max-height: 500px;
+  position: sticky;
+  top: 130px;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm3}) {
   }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const PriceContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const PriceSmallText = styled.span`
+  font-weight: 400;
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const Price = styled.span`
+  font-weight: bold;
+  font-size: 1.5rem;
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const PriceBigText = styled.p`
+  /* font-size: 1rem; */
+  font-weight: 300;
+  color: gray;
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const PriceDown = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const PriceDownSpan = styled.span`
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+const PriceDownBtn = styled.button`
+  background-color: #1dbf73;
+  padding: 10px;
+  color: white;
+  font-weight: 500;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
@@ -630,7 +689,20 @@ function Gig() {
             </ReviewsContainer>
           </Reviews>
         </Left>
-        <Right></Right>
+        <Right>
+          <PriceContainer>
+            <PriceSmallText>I agree to pay</PriceSmallText>
+            <Price>566660</Price>
+          </PriceContainer>
+          <PriceBigText>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe,
+          </PriceBigText>
+          <PriceDown>
+            <PriceDownSpan>4 days delivery</PriceDownSpan>
+            <PriceDownSpan>3 rating</PriceDownSpan>
+          </PriceDown>
+          <PriceDownBtn>Continue</PriceDownBtn>
+        </Right>
       </Container>
     </G>
   );
