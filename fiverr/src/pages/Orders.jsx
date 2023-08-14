@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import pic from "../assets/mman.png";
-import { AiTwotoneDelete } from "react-icons/ai";
+import { RiMessage2Line } from "react-icons/ri";
 
 const M = styled.div`
   width: 100%;
@@ -39,8 +39,6 @@ const Container = styled.div`
   }
 `;
 const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -58,19 +56,7 @@ const TitleText = styled.h2`
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
-const TitleBtn = styled.button`
-  background-color: #1dbf73;
-  color: white;
-  font-weight: 500;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 0.3rem;
-  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
-  }
-  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
-  }
-`;
+
 const TableContainer = styled.div`
   width: 100%;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
@@ -123,11 +109,13 @@ const Image = styled.img`
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
-const DeleteIcon = styled(AiTwotoneDelete)`
+const MessageIcon = styled(RiMessage2Line)`
   width: 20px;
   cursor: pointer;
   font-size: 1.5rem;
-  color: red;
+  /* color: red; */
+  background-color: #1dbf73;
+  color: white;
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
@@ -135,22 +123,26 @@ const DeleteIcon = styled(AiTwotoneDelete)`
 `;
 
 function Orders() {
+  const currentUser = {
+    id: 1,
+    userName: "Micah",
+    isSeller: true,
+  };
+
   return (
     <M>
       <Container>
         <Title>
           <TitleText>My Gigs</TitleText>
-          <Link to="/add">
-            <TitleBtn>Add new gig</TitleBtn>
-          </Link>
         </Title>
         <TableContainer>
           <Table>
             <Tr>
               <Th>image</Th>
               <Th>title</Th>
-              <Th>sales</Th>
-              <Th>action</Th>
+              <Th>price</Th>
+              <Th>{currentUser?.isSeller ? "Buyer" : "Seller"}</Th>
+              <Th>contact</Th>
             </Tr>
             <Tr>
               <Td>
@@ -160,18 +152,7 @@ function Orders() {
               <Td>88</Td>
               <Td>123</Td>
               <Td>
-                <DeleteIcon />
-              </Td>
-            </Tr>
-            <Tr>
-              <Td>
-                <Image src={pic} />
-              </Td>
-              <Td>Gig1</Td>
-              <Td>88</Td>
-              <Td>123</Td>
-              <Td>
-                <DeleteIcon />
+                <MessageIcon />
               </Td>
             </Tr>
             <Tr>
@@ -182,7 +163,18 @@ function Orders() {
               <Td>88</Td>
               <Td>123</Td>
               <Td>
-                <DeleteIcon />
+                <MessageIcon />
+              </Td>
+            </Tr>
+            <Tr>
+              <Td>
+                <Image src={pic} />
+              </Td>
+              <Td>Gig1</Td>
+              <Td>88</Td>
+              <Td>123</Td>
+              <Td>
+                <MessageIcon />
               </Td>
             </Tr>
           </Table>
