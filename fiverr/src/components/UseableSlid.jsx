@@ -3,7 +3,6 @@ import { useState } from "react";
 import ReactSimplyCarousel from "react-simply-carousel";
 
 const S = styled.div`
-  /* z-index: 1; */
   height: max-content;
 `;
 
