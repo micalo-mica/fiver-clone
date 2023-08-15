@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import { Token, access, activation } from "../utils/createToken.js";
 import { validateEmail } from "../utils/validateEmail.js";
 
-// ========== bellow is the real code for sign with email verification ==========
+const { DOMAIN } = process.env;
 
 // register
 export const register = async (req, res, next) => {
@@ -41,7 +41,7 @@ export const register = async (req, res, next) => {
     const activation_token = activation(user);
 
     // send email
-    const url = `http://localhost:3000/api/auth/activate/${activation_token}`;
+    const url = `${DOMAIN}/api/auth/activate/${activation_token}`;
     sendMail.sendEmail({
       email,
       url,

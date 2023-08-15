@@ -1,34 +1,26 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import createError from "../middleware/createError";
 dotenv.config();
 
 const { MAIL, MAILTRAP_USER, MAILTRAP_PASSWORD } = process.env;
 
-export const sendEmail = (to, url, text) => {
-  //   const transporter = nodemailer.createTransport({
-  //     host: SMPT_HOST,
-  //     port: SMPT_PORT,
-  //     service: SMPT_SERVICE,
-  //     auth: {
-  //       user: SMPT_MAIL,
-  //       pass: SMPT_PASSWORD,
-  //     },
-  //   });
+export const sendEmail = async (to, url, text) => {
+  try {
+    var transport = nodemailer.createTransport({
+      host: "sandbox.smtp.mailtrap.io",
+      port: 2525,
+      auth: {
+        user: MAILTRAP_USER,
+        pass: MAILTRAP_PASSWORD,
+      },
+    });
 
-  var transport = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
-    auth: {
-      user: MAILTRAP_USER,
-      pass: "714123a99085b4",
-    },
-  });
-
-  const mailOptions = {
-    from: MAIl,
-    to: to,
-    subject: text,
-    html: `
+    const mailOptions = {
+      from: MAIL,
+      to: to,
+      subject: text,
+      html: `
   <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -102,10 +94,11 @@ export const sendEmail = (to, url, text) => {
   </body>
 </html>
   `,
-  };
-
-  smtpTransport.sendMail(mailOptions, (err, info) => {
-    if (err) return { err };
-    return info;
-  });
+    };
+    const mailResponse = await transport.sendMail(mailOptions);
+    // You can return  the response if you want to
+    return mailResponse;
+  } catch (error) {
+    return next(createError(500, error.message));
+  }
 };
