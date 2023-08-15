@@ -124,7 +124,7 @@ const Login = () => {
     <Container>
       <Wrapper>
         <Logo>Fiver-clone</Logo>
-        <Tittle>Register as a new user</Tittle>
+        <Tittle>Sign In</Tittle>
         <FormContainer1>
           <Form>
             <LabelContainer>
@@ -161,8 +161,8 @@ const Login = () => {
             <Button type="submit">Login</Button>
             <FormNotMember>
               <NoAccountText>Already have an account?</NoAccountText>
-              <Link to="/login">
-                <SiginUp>Sign In</SiginUp>
+              <Link to="/register">
+                <SiginUp>Register</SiginUp>
               </Link>
             </FormNotMember>
           </ButtonContainer>
