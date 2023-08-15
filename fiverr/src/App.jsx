@@ -18,6 +18,8 @@ import Login from "./pages/Login.jsx";
 import Message from "./pages/Message.jsx";
 import Messages from "./pages/Messages.jsx";
 import Register from "./pages/Register.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
+import ActivateUser from "./pages/ActivateUser.jsx";
 
 const Layout = () => {
   // const queryClient = new QueryClient();
@@ -78,6 +80,14 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/activate/:activation_token",
+        element: <ActivateUser />,
+      },
+      {
+        path: "/resetPassword/:forgot_token",
+        element: <ForgotPassword />,
       },
     ],
   },
