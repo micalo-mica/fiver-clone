@@ -2,22 +2,30 @@ import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 dotenv.config();
 
-const { SMPT_PORT, SMPT_HOST, SMPT_SERVICE, SMPT_MAIL, SMPT_PASSWORD } =
-  process.env;
+const { MAIL, MAILTRAP_USER, MAILTRAP_PASSWORD } = process.env;
 
 export const sendEmail = (to, url, text) => {
-  const transporter = nodemailer.createTransport({
-    host: SMPT_HOST,
-    port: SMPT_PORT,
-    service: SMPT_SERVICE,
+  //   const transporter = nodemailer.createTransport({
+  //     host: SMPT_HOST,
+  //     port: SMPT_PORT,
+  //     service: SMPT_SERVICE,
+  //     auth: {
+  //       user: SMPT_MAIL,
+  //       pass: SMPT_PASSWORD,
+  //     },
+  //   });
+
+  var transport = nodemailer.createTransport({
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
     auth: {
-      user: SMPT_MAIL,
-      pass: SMPT_PASSWORD,
+      user: MAILTRAP_USER,
+      pass: "714123a99085b4",
     },
   });
 
   const mailOptions = {
-    from: Orantage,
+    from: MAIl,
     to: to,
     subject: text,
     html: `
