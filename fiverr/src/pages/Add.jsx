@@ -53,6 +53,9 @@ const Sections = styled.div`
   gap: 1rem;
   gap: 0.5rem;
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
