@@ -10,19 +10,22 @@ import reviewRoute from "./routes/review.route.js";
 import authRoute from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import connect from "./utils/db.js";
 
 const app = express();
 dotenv.config();
 mongoose.set("strictQuery", true);
 
-const connect = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO);
-    console.log("Connected to mongoDB!");
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const connect = async () => {
+//   try {
+//     await mongoose.connect(process.env.MONGO);
+//     console.log("Connected to mongoDB!");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+connect();
 
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
