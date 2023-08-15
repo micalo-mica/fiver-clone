@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { BiArrowBack } from "react-icons/bi";
+
 import Pro from "../assets/pro.png";
 import { categoryForInput } from "../static/categoryD";
 
@@ -25,7 +25,7 @@ const Container = styled.div`
   margin: 0px auto;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   @media (max-width: ${({ theme }) => theme.screens.lg1}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.md}) {
@@ -48,12 +48,19 @@ const PageTitles = styled.h2`
 `;
 
 const Sections = styled.div`
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  gap: 0.5rem;
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
   }
 `;
 const Left = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
@@ -82,7 +89,7 @@ const InputContainer = styled.div`
 `;
 
 const Label = styled.label`
-  font-size: 0.8rem;
+  font-size: 1.3rem;
   font-weight: 400;
   margin-top: 0.5rem;
   @media (max-width: ${({ theme }) => theme.screens.xl}) {
@@ -172,8 +179,69 @@ const Select = styled.select`
 
 const Option = styled.option``;
 
+const TextArea = styled.textarea`
+  border: none;
+  border: none;
+  appearance: none;
+  font-size: 1rem;
+  border-radius: 0.3rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  &:focus {
+    outline: none;
+  }
+  @media (max-width: ${({ theme }) => theme.screens.xl}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.lg2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+    width: 22rem;
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+    width: 19rem;
+  }
+`;
+
 // right
 const Right = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  @media (max-width: ${({ theme }) => theme.screens.sm2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm1}) {
+  }
+`;
+
+const Button = styled.button`
+  border: none;
+  padding: 0.8rem 3rem;
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.btn};
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  margin-top: 0.6rem;
+  width: max-content;
+  align-self: center;
+  @media (max-width: ${({ theme }) => theme.screens.xl}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.lg2}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.lg1}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.md}) {
+  }
+  @media (max-width: ${({ theme }) => theme.screens.sm3}) {
+  }
   @media (max-width: ${({ theme }) => theme.screens.sm2}) {
   }
   @media (max-width: ${({ theme }) => theme.screens.sm1}) {
@@ -205,9 +273,45 @@ function Add() {
                   })}
               </Select>
             </InputContainer>
+            <InputContainer>
+              <Label>Upload Image</Label>
+              <Input type="file" multiple />
+            </InputContainer>
+            <InputContainer>
+              <Label>Description</Label>
+              <TextArea
+                name="description"
+                placeholder="property description"
+                cols="30"
+                rows="10"
+              ></TextArea>
+            </InputContainer>
           </Left>
-          <Right></Right>
+          <Right>
+            <InputContainer>
+              <Label>Title</Label>
+              <Input type="text" name="title" placeholder="title" />
+            </InputContainer>
+            <InputContainer>
+              <Label>Description</Label>
+              <TextArea
+                name="description"
+                placeholder="short description"
+                cols="30"
+                rows="10"
+              ></TextArea>
+            </InputContainer>
+            <InputContainer>
+              <Label>Delivery time</Label>
+              <Input type="number" name="number" min={1} />
+            </InputContainer>
+            <InputContainer>
+              <Label>Price</Label>
+              <Input type="number" name="price" min={1} />
+            </InputContainer>
+          </Right>
         </Sections>
+        <Button>Create</Button>
       </Container>
     </A>
   );

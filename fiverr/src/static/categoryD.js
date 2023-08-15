@@ -1,26 +1,26 @@
 export const categoryForInput = [
   {
     id: 1,
-    cat: "self corn",
+    cat: "Web design",
   },
   {
     id: 2,
-    cat: "flat",
+    cat: "Programming",
   },
   {
     id: 3,
-    cat: "bungalow",
+    cat: "Animation",
   },
   {
     id: 4,
-    cat: "single room",
+    cat: "Music",
   },
   {
     id: 5,
-    cat: "apartment",
+    cat: "Art",
   },
   {
     id: 6,
-    cat: "for sell",
+    cat: "Writer",
   },
 ];
