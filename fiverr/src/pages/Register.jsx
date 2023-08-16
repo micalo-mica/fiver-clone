@@ -158,7 +158,7 @@ const Register = () => {
             </LabelContainer>
           </Form>
           <ButtonContainer>
-            <Button type="submit">Login</Button>
+            <Button type="submit">submit</Button>
             <FormNotMember>
               <NoAccountText>Already have an account?</NoAccountText>
               <Link to="/login">

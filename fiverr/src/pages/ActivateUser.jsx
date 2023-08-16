@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -28,38 +26,6 @@ const Tittle = styled.h4`
   font-size: 1rem;
   font-weight: 300;
 `;
-const FormContainer1 = styled.div``;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-const LabelContainer = styled.div``;
-const Label = styled.label`
-  font-size: 1rem;
-  color: ${({ theme }) => theme.colors.blue3};
-`;
-
-const Input = styled.input`
-  width: 100%;
-  height: 2.4rem;
-  border-radius: 6px;
-  border: none;
-  appearance: none;
-  font-size: 1rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
-  color: ${({ theme }) => theme.colors.blue3};
-  box-shadow: 13px 11px 44px 16px rgba(0, 0, 0, 0.18);
-  -webkit-box-shadow: 13px 11px 44px 16px rgba(0, 0, 0, 0.18);
-  -moz-box-shadow: 13px 11px 44px 16px rgba(0, 0, 0, 0.18);
-  &:focus {
-    outline: none;
-  }
-`;
 
 const Button = styled.button`
   width: 100%;
@@ -74,46 +40,15 @@ const Button = styled.button`
   border-radius: 0.3rem;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.8rem;
-`;
-
-const FormNotMember = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-`;
-const NoAccountText = styled.div`
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.yellow2};
-`;
-const SmallBtn = styled.div`
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: ${({ theme }) => theme.colors.orange};
-  padding: 0.3rem 0.2rem;
-  border-radius: 0.2rem;
-  cursor: pointer;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.btn};
-    border: none;
-  }
-`;
-
 function ActivateUser() {
   return (
     <Container>
       <Wrapper>
         <Logo>Fiver-clone</Logo>
-        <Tittle>Enter your email address</Tittle>
-        <Button type="submit">submit</Button>
+        <Tittle>Click the button below to login in</Tittle>
+        <Link to="/login">
+          <Button type="submit">Login in</Button>
+        </Link>
       </Wrapper>
     </Container>
   );
