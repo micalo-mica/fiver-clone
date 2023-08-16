@@ -83,6 +83,7 @@ const ButtonContainer = styled.div`
   margin-top: 0.8rem;
 `;
 const Button = styled.button`
+  margin-top: 0.5rem;
   border: none;
   padding: 0.5rem 0.8rem;
   background-color: ${({ theme }) => theme.colors.btn};
@@ -103,7 +104,7 @@ const NoAccountText = styled.div`
   font-weight: 500;
   color: ${({ theme }) => theme.colors.yellow2};
 `;
-const SiginUp = styled.div`
+const SmallBtn = styled.div`
   text-align: center;
   font-size: 0.8rem;
   font-weight: bold;
@@ -157,12 +158,15 @@ const Login = () => {
               </InputContainer>
             </LabelContainer>
           </Form>
+          <Button type="submit">Login</Button>
           <ButtonContainer>
-            <Button type="submit">Login</Button>
+            <Link to="/forgotPassword">
+              <SmallBtn type="submit">forgot password</SmallBtn>
+            </Link>
             <FormNotMember>
-              <NoAccountText>Already have an account?</NoAccountText>
+              <NoAccountText>Do not have an account?</NoAccountText>
               <Link to="/register">
-                <SiginUp>Register</SiginUp>
+                <SmallBtn>Register</SmallBtn>
               </Link>
             </FormNotMember>
           </ButtonContainer>
