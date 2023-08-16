@@ -106,7 +106,7 @@ const NoAccountText = styled.div`
   font-weight: 500;
   color: ${({ theme }) => theme.colors.yellow2};
 `;
-const SiginUp = styled.div`
+const SignUp = styled.div`
   text-align: center;
   font-size: 0.8rem;
   font-weight: bold;
@@ -151,10 +151,7 @@ const Register = () => {
       return toast.error("Password must be at least 6 characters.", {
         position: toast.POSITION.TOP_LEFT,
       });
-    if (!isMatch(password, cf_password))
-      return toast.error("Password did not match.", {
-        position: toast.POSITION.TOP_LEFT,
-      });
+    // send to server
     try {
       const res = await newRequest.post("auth/register", {
         name,
@@ -239,7 +236,7 @@ const Register = () => {
             <FormNotMember>
               <NoAccountText>Already have an account?</NoAccountText>
               <Link to="/login">
-                <SiginUp>Sign In</SiginUp>
+                <SignUp>Sign In</SignUp>
               </Link>
             </FormNotMember>
           </ButtonContainer>
