@@ -105,7 +105,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <RouterProvider router={router} />
-      <ToastContainer autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={5000} theme="dark" />
     </ThemeProvider>
   );
 }

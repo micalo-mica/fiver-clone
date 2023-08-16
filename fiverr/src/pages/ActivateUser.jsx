@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import newRequest from "../helper/newRequest";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -45,33 +46,28 @@ const Button = styled.button`
 
 function ActivateUser() {
   const [token, setToken] = useState("");
-
-  const activateUser = async () => {
-    try {
-      const res = await newRequest.post("register/activate-user", {
-        token,
-      });
-      // toast(res.data.msg, {
-      //   className: "toast-success",
-      //   bodyClassName: "toast-success",
-      // });
-    } catch (error) {
-      console.log(error);
-      // toast(error.response.data.msg, {
-      //   className: "toast-failed",
-      //   bodyClassName: "toast-failed",
-      // });
-    }
-  };
+  // const { search } = useLocation();
+  console.log(token);
 
   useEffect(() => {
     const urlToken = window.location.search.split("=")[1];
-    setToken(urlToken || "");
+    setToken(urlToken);
   }, []);
 
   useEffect(() => {
     // check token
     if (token) {
+      const activateUser = async () => {
+        try {
+          const res = await newRequest.post("auth/register/activateUser", {
+            token,
+          });
+          toast.success(res.data.msg);
+        } catch (error) {
+          console.log(error);
+          toast.error(error.response.data);
+        }
+      };
       activateUser();
     }
   }, [token]);
@@ -83,6 +79,9 @@ function ActivateUser() {
         <Tittle>Click the button below to login in</Tittle>
         <Link to="/login">
           <Button type="submit">Login in</Button>
+        </Link>
+        <Link to="/register">
+          <Button type="submit">go back</Button>
         </Link>
       </Wrapper>
     </Container>

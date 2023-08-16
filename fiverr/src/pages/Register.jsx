@@ -138,19 +138,13 @@ const Register = () => {
     e.preventDefault();
     // check fields
     if (isEmpty(name) || isEmpty(password))
-      return toast.error("Fill all field !", {
-        position: toast.POSITION.TOP_LEFT,
-      });
+      return toast.error("Fill all field !");
     // check email
     if (!isEmail(email))
-      return toast.error("Please enter a valid email address.", {
-        position: toast.POSITION.TOP_LEFT,
-      });
+      return toast.error("Please enter a valid email address.");
     // check password
     if (isLength(password))
-      return toast.error("Password must be at least 6 characters.", {
-        position: toast.POSITION.TOP_LEFT,
-      });
+      return toast.error("Password must be at least 6 characters.");
     // send to server
     try {
       const res = await newRequest.post("auth/register", {
@@ -158,13 +152,9 @@ const Register = () => {
         email,
         password,
       });
-      toast.success(res.data.msg, {
-        position: toast.POSITION.TOP_LEFT,
-      });
+      toast.success(res.data.msg);
     } catch (error) {
-      toast.error(error.response.data.msg, {
-        position: toast.POSITION.TOP_LEFT,
-      });
+      toast.error(error.response.data.msg);
     }
     handleReset();
   };
