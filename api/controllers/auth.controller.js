@@ -182,7 +182,7 @@ export const forgot = async (req, res) => {
     const forgot_token = forgotToken({ id: user.id });
 
     // send email
-    const url = `${DOMAIN}/resetPassword?token=${forgot_token}`;
+    const url = `${DOMAIN}/putNewPassword?token=${forgot_token}`;
     sendMail.sendEmail({
       email,
       url,
