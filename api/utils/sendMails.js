@@ -1,11 +1,11 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
-import createError from "../middleware/createError";
+
 dotenv.config();
 
 const { MAIL, MAILTRAP_USER, MAILTRAP_PASSWORD } = process.env;
 
-export const sendEmail = async (to, url, text) => {
+export const sendEmail = async ({ email, url, text }) => {
   try {
     var transport = nodemailer.createTransport({
       host: "sandbox.smtp.mailtrap.io",
@@ -18,7 +18,7 @@ export const sendEmail = async (to, url, text) => {
 
     const mailOptions = {
       from: MAIL,
-      to: to,
+      to: email,
       subject: text,
       html: `
   <html lang="en">
@@ -30,7 +30,7 @@ export const sendEmail = async (to, url, text) => {
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
       rel="stylesheet"
     />
-    <title>Orantage | Account Activation</title>
+    <title>fiver | Account Verification</title>
     <style>
       body {
         background-color: #333333;
@@ -80,7 +80,7 @@ export const sendEmail = async (to, url, text) => {
     <div class="container">
       <div class="wrapper">
         <div class="card">
-          <h1><span>Welcome !</span> And thank you for registering !</h1>
+          <h1><span>Welcome !</span> And thank you for being with us !</h1>
           <p>Please validate your email by clicking the button below 🙂</p>
           <a href=${url}><button>${text}</button></a>
           <p class="spacing">
@@ -95,10 +95,11 @@ export const sendEmail = async (to, url, text) => {
 </html>
   `,
     };
+    console.log(email);
     const mailResponse = await transport.sendMail(mailOptions);
     // You can return  the response if you want to
     return mailResponse;
   } catch (error) {
-    return next(createError(500, error.message));
+    throw new Error(error.message);
   }
 };

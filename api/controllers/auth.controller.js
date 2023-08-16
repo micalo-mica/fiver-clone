@@ -2,8 +2,9 @@ import User from "../models/user.model.js";
 import createError from "../middleware/createError.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { Token, access, activation } from "../utils/createToken.js";
+import { activation, forgotToken } from "../utils/createToken.js";
 import { validateEmail } from "../utils/validateEmail.js";
+import { sendEmail } from "../utils/sendMails.js";
 
 const { DOMAIN } = process.env;
 
@@ -41,8 +42,8 @@ export const register = async (req, res, next) => {
     const activation_token = activation(user);
 
     // send email
-    const url = `${DOMAIN}/api/auth/activate/${activation_token}`;
-    sendMail.sendEmail({
+    const url = `${DOMAIN}/activate?token=${activation_token}`;
+    sendEmail({
       email,
       url,
       text: "Activate your account",
@@ -50,7 +51,7 @@ export const register = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      message: `please check your email:- ${user.email} to activate your account!`,
+      msg: `please check your email:- ${user.email} to activate your account!`,
     });
   } catch (error) {
     return next(createError(500, error.message));
@@ -72,6 +73,7 @@ export const activateUser = async (req, res, next) => {
 
     const { name, email, password } = newUser;
 
+    // check if that user is already not available again
     const checkUser = await User.findOne({ email });
 
     if (checkUser) {
@@ -98,14 +100,14 @@ export const activateUser = async (req, res, next) => {
 // logins
 export const login = async (req, res, next) => {
   try {
-    // get cred
+    // get use credential
     const { email, password } = req.body;
 
     if (!email || !password) {
       return next(createError(400, "Please provide the all fields!"));
     }
 
-    // check email
+    // check email in the db
     const user = await User.findOne({ email });
 
     if (!user)
@@ -113,10 +115,13 @@ export const login = async (req, res, next) => {
         createError(404, "This email is not registered in our system.")
       );
 
+    // compare password
     const isCorrect = bcrypt.compareSync(password, user.password);
+
     if (!isCorrect)
       return next(createError(400, "Please provide the correct information!"));
 
+    // sign jwt token to the user
     const token = jwt.sign(
       {
         id: user._id,
@@ -125,6 +130,8 @@ export const login = async (req, res, next) => {
     );
 
     const { DBPassword, ...info } = user._doc;
+
+    // send cookie
     res
       .cookie("accessToken", token, {
         httpOnly: true,
@@ -166,16 +173,16 @@ export const forgot = async (req, res) => {
     // get email
     const { email } = req.body;
 
-    // check email
+    // check email db
     const user = await User.findOne({ email });
     if (!user)
       return next(createError(400, "Please provide the correct email!"));
 
     // create ac token
-    const ac_token = access({ id: user.id });
+    const forgot_token = forgotToken({ id: user.id });
 
     // send email
-    const url = `http://localhost:3000/auth/reset-password/${ac_token}`;
+    const url = `${DOMAIN}/resetPassword?token=${forgot_token}`;
     sendMail.sendEmail({
       email,
       url,
@@ -183,7 +190,10 @@ export const forgot = async (req, res) => {
     });
 
     // success
-    res.status(200).json({ success: true, msg: " Please check your email." });
+
+    res
+      .status(200)
+      .json({ success: true, msg: `please check your email:- ${user.email}` });
   } catch (error) {
     next(createError(500, "Something went wrong"));
   }

@@ -7,10 +7,7 @@ dotenv.config();
 export const activation = (payload) => {
   return jwt.sign(payload, process.env.ACTIVATION_TOKEN, { expiresIn: "30m" });
 };
-export const Token = (payload) => {
-  const token = jwt.sign({ id: payload }, process.env.JWT_SECRET_KEY);
-  return token;
-};
-export const access = (payload) => {
+
+export const forgotToken = (payload) => {
   return jwt.sign(payload, process.env.ACCESS_TOKEN, { expiresIn: "15m" });
 };
