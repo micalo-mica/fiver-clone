@@ -148,14 +148,15 @@ export const login = async (req, res, next) => {
   }
 };
 
+// logout a user
 export const logout = async (req, res) => {
   try {
     res
       .clearCookie("accessToken", null, {
         expires: new Date(Date.now()),
         httpOnly: true,
-        sameSite: "none",
-        secure: true,
+        // sameSite: "none",
+        // secure: true,
       })
       .status(200)
       .json({
