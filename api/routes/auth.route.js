@@ -23,9 +23,9 @@ router.post("/login/login-user", login);
 router.post("/logout/logout-user", logout);
 
 // For a user forgot password
-router.post("/logout", forgot);
+router.post("/forgot/email", forgot);
 
 // For a user reset password
-router.post("/logout", reset);
+router.post("/forgot/new-password", reset);
 
 export default router;

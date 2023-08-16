@@ -149,7 +149,7 @@ export const login = async (req, res, next) => {
 };
 
 // logout a user
-export const logout = async (req, res) => {
+export const logout = async (req, res, next) => {
   try {
     res
       .clearCookie("accessToken", null, {
@@ -168,7 +168,8 @@ export const logout = async (req, res) => {
   }
 };
 
-export const forgot = async (req, res) => {
+// forgot password
+export const forgot = async (req, res, next) => {
   try {
     // get email
     const { email } = req.body;
@@ -183,19 +184,19 @@ export const forgot = async (req, res) => {
 
     // send email
     const url = `${DOMAIN}/putNewPassword?token=${forgot_token}`;
-    sendMail.sendEmail({
+    sendEmail({
       email,
       url,
       text: "Reset your password",
     });
 
     // success
-
     res
       .status(200)
       .json({ success: true, msg: `please check your email:- ${user.email}` });
   } catch (error) {
-    next(createError(500, "Something went wrong"));
+    // next(createError(500, "Something went wrong"));
+    next(createError(500, error.message));
   }
 };
 
