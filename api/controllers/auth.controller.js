@@ -101,9 +101,9 @@ export const activateUser = async (req, res, next) => {
 export const login = async (req, res, next) => {
   try {
     // get use credential
-    const { email, password } = req.body;
+    const { email, UserPassword } = req.body;
 
-    if (!email || !password) {
+    if (!email || !UserPassword) {
       return next(createError(400, "Please provide the all fields!"));
     }
 
@@ -116,7 +116,7 @@ export const login = async (req, res, next) => {
       );
 
     // compare password
-    const isCorrect = bcrypt.compareSync(password, user.password);
+    const isCorrect = bcrypt.compareSync(UserPassword, user.password);
 
     if (!isCorrect)
       return next(createError(400, "Please provide the correct information!"));
@@ -129,20 +129,19 @@ export const login = async (req, res, next) => {
       process.env.JWT_KEY
     );
 
-    const { DBPassword, ...info } = user._doc;
+    const { password, ...info } = user._doc;
 
     // send cookie
     res
       .cookie("accessToken", token, {
         httpOnly: true,
-        sameSite: "none",
-        secure: true,
+        // sameSite: "none",
+        // secure: true,
       })
       .status(200)
       .json({
         success: true,
         info,
-        token,
       });
   } catch (error) {
     next(createError(500, error.message));
