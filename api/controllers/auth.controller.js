@@ -200,20 +200,29 @@ export const forgot = async (req, res, next) => {
   }
 };
 
-export const reset = async (req, res) => {
+// reset
+export const reset = async (req, res, next) => {
   try {
     // get password
-    const { password } = req.body;
+    const { UserPassword, forgot_token } = req.body;
+
+    // verify the token
+    const newUser = jwt.verify(forgot_token, process.env.ACCESS_TOKEN);
+    if (!newUser) {
+      return next(createError(400, "Invalid token"));
+    }
+
+    // i can also use this to update user
+    const { id } = newUser;
 
     // hash password
     const salt = await bcrypt.genSalt();
-    const hashPassword = await bcrypt.hash(password, salt);
+    const hashPassword = await bcrypt.hash(UserPassword, salt);
 
     // update password
-    await User.findOneAndUpdate(
-      { _id: req.user.id },
-      { password: hashPassword }
-    );
+    await User.findByIdAndUpdate(req.userId, {
+      $set: { password: hashPassword },
+    });
 
     // reset success
     res
