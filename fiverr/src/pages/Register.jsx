@@ -2,9 +2,12 @@ import styled from "styled-components";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { isEmpty, isEmail, isLength, isMatch } from "../helper/validate";
+import newRequest from "../helper/newRequest";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,6 +122,67 @@ const SiginUp = styled.div`
 
 const Register = () => {
   const [visible, setVisible] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const { name, email, password } = userInfo;
+  console.log(userInfo);
+
+  const handleChange = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
+
+  const register = async (e) => {
+    e.preventDefault();
+    // check fields
+    if (isEmpty(name) || isEmpty(password))
+      return toast.error("Fill all field !", {
+        position: toast.POSITION.TOP_LEFT,
+      });
+    // check email
+    if (!isEmail(email))
+      return toast.error("Please enter a valid email address.", {
+        position: toast.POSITION.TOP_LEFT,
+      });
+    // check password
+    if (isLength(password))
+      return toast.error("Password must be at least 6 characters.", {
+        position: toast.POSITION.TOP_LEFT,
+      });
+    if (!isMatch(password, cf_password))
+      return toast.error("Password did not match.", {
+        position: toast.POSITION.TOP_LEFT,
+      });
+    try {
+      const res = await newRequest.post("auth/register", {
+        name,
+        email,
+        password,
+      });
+      toast.success(res.data.msg, {
+        position: toast.POSITION.TOP_LEFT,
+      });
+    } catch (error) {
+      toast.error(error.response.data.msg, {
+        position: toast.POSITION.TOP_LEFT,
+      });
+    }
+    handleReset();
+  };
+
+  const handleReset = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+    setUserInfo({
+      ...userInfo,
+      name: "",
+      email: "",
+      password: "",
+    });
+  };
 
   return (
     <Container>
@@ -126,28 +190,41 @@ const Register = () => {
         <Logo>Fiver-clone</Logo>
         <Tittle>Register as a new user</Tittle>
         <FormContainer1>
-          <Form>
+          <Form onSubmit={register}>
             <LabelContainer>
               <Label htmlFor="email">Name</Label>
               {/* <InputContainer> */}
-              <Input type="Name" name="Name" autoComplete="Name" required />
+              <Input
+                type="text"
+                name="name"
+                autoComplete="name"
+                required
+                onChange={handleChange}
+              />
               {/* </InputContainer> */}
             </LabelContainer>
             <LabelContainer>
               <Label htmlFor="email">Email address</Label>
               {/* <InputContainer> */}
-              <Input type="email" name="email" autoComplete="email" required />
+              <Input
+                type="email"
+                name="email"
+                autoComplete="email"
+                required
+                onChange={handleChange}
+              />
               {/* </InputContainer> */}
             </LabelContainer>
+            {/* password */}
             <LabelContainer>
-              {/* password */}
               <Label htmlFor="email">Password</Label>
               <InputContainer rel="relative">
                 <Input
                   type={visible ? "text" : "password"}
                   name="password"
-                  autoComplete="current-password"
+                  autoComplete="password"
                   required
+                  onChange={handleChange}
                 />
                 {visible ? (
                   <IconVisible onClick={() => setVisible(false)} />
@@ -156,9 +233,9 @@ const Register = () => {
                 )}
               </InputContainer>
             </LabelContainer>
+            <Button type="submit">submit</Button>
           </Form>
           <ButtonContainer>
-            <Button type="submit">submit</Button>
             <FormNotMember>
               <NoAccountText>Already have an account?</NoAccountText>
               <Link to="/login">

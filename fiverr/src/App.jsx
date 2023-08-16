@@ -21,6 +21,8 @@ import Register from "./pages/Register.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ActivateUser from "./pages/ActivateUser.jsx";
 import PutNewPassword from "./pages/PutNewPassword.jsx";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Layout = () => {
   // const queryClient = new QueryClient();
@@ -103,6 +105,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <RouterProvider router={router} />
+      <ToastContainer autoClose={3000} />
     </ThemeProvider>
   );
 }

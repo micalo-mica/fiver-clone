@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useState } from "react";
+import newRequest from "../helper/newRequest";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -41,6 +44,38 @@ const Button = styled.button`
 `;
 
 function ActivateUser() {
+  const [token, setToken] = useState("");
+
+  const activateUser = async () => {
+    try {
+      const res = await newRequest.post("register/activate-user", {
+        token,
+      });
+      // toast(res.data.msg, {
+      //   className: "toast-success",
+      //   bodyClassName: "toast-success",
+      // });
+    } catch (error) {
+      console.log(error);
+      // toast(error.response.data.msg, {
+      //   className: "toast-failed",
+      //   bodyClassName: "toast-failed",
+      // });
+    }
+  };
+
+  useEffect(() => {
+    const urlToken = window.location.search.split("=")[1];
+    setToken(urlToken || "");
+  }, []);
+
+  useEffect(() => {
+    // check token
+    if (token) {
+      activateUser();
+    }
+  }, [token]);
+
   return (
     <Container>
       <Wrapper>
