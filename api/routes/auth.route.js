@@ -14,7 +14,7 @@ const router = express.Router();
 router.post("/register", register);
 
 // For activating a user
-router.post("/register/activate-user", activateUser);
+router.post("/register/activateUser", activateUser);
 
 // For login a user
 router.post("/login/login-user", login);

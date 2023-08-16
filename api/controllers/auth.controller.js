@@ -62,16 +62,21 @@ export const register = async (req, res, next) => {
 export const activateUser = async (req, res, next) => {
   try {
     // get token
-    const { activation_token } = req.body;
+    const { token } = req.body;
+
+    if (!token) {
+      return next(createError(400, "No token!"));
+    }
 
     // verify token
-    const newUser = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN);
+    const newUser = jwt.verify(token, process.env.ACTIVATION_TOKEN);
+
+    const { name, email, password } = newUser;
+    console.log(name, email, password);
 
     if (!newUser) {
       return next(createError(400, "Invalid token"));
     }
-
-    const { name, email, password } = newUser;
 
     // check if that user is already not available again
     const checkUser = await User.findOne({ email });
