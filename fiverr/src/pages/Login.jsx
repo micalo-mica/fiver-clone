@@ -120,6 +120,18 @@ const SmallBtn = styled.div`
 
 const Login = () => {
   const [visible, setVisible] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    email: undefined,
+    password: undefined,
+  });
+
+  const handleChange = (e) => {
+    setUserInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <Container>
@@ -129,16 +141,14 @@ const Login = () => {
         <FormContainer1>
           <Form>
             <LabelContainer>
-              <Label htmlFor="email">Name</Label>
-              {/* <InputContainer> */}
-              <Input type="Name" name="Name" autoComplete="Name" required />
-              {/* </InputContainer> */}
-            </LabelContainer>
-            <LabelContainer>
               <Label htmlFor="email">Email address</Label>
-              {/* <InputContainer> */}
-              <Input type="email" name="email" autoComplete="email" required />
-              {/* </InputContainer> */}
+              <Input
+                type="email"
+                name="email"
+                autoComplete="email"
+                required
+                onchange={handleChange}
+              />
             </LabelContainer>
             <LabelContainer>
               {/* password */}
@@ -149,6 +159,7 @@ const Login = () => {
                   name="password"
                   autoComplete="current-password"
                   required
+                  onchange={handleChange}
                 />
                 {visible ? (
                   <IconVisible onClick={() => setVisible(false)} />
@@ -157,8 +168,8 @@ const Login = () => {
                 )}
               </InputContainer>
             </LabelContainer>
+            <Button type="submit">Login</Button>
           </Form>
-          <Button type="submit">Login</Button>
           <ButtonContainer>
             <Link to="/forgotPassword">
               <SmallBtn type="submit">forgot password</SmallBtn>
