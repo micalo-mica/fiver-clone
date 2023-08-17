@@ -5,6 +5,10 @@ import { FaTimes } from "react-icons/fa";
 import Pro from "../assets/pro.png";
 import { useGlobalContext } from "../context/HeaderContext";
 import { useState } from "react";
+import newRequest from "../helper/newRequest";
+import { useContext } from "react";
+import { AuthContext } from "../context/authContext";
+import { toast } from "react-toastify";
 
 const N = styled.div`
   background-color: ${({ theme }) => theme.colors.hero};
@@ -286,6 +290,21 @@ function Navbar() {
     isSeller: true,
   };
 
+  // context
+  const { dispatch } = useContext(AuthContext);
+
+  // logout func
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    try {
+      await newRequest.post("auth/logout/logoutUser");
+      dispatch({ type: "LOGOUT" });
+      toast.success("Logout success");
+    } catch (error) {
+      toast.error(error.response.data);
+    }
+  };
+
   return (
     <N onMouseOver={handleSubmenu}>
       <NavbarContainer>
@@ -336,9 +355,7 @@ function Navbar() {
                 <Link to="/messages">
                   <Options>Messages</Options>
                 </Link>
-                <Link
-                // onClick={handleLogout}
-                >
+                <Link onClick={handleLogout}>
                   <Options>Logout</Options>
                 </Link>
               </ProfileOptions>
