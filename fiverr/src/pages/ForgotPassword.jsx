@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { isEmail, isEmpty } from "../helper/validate";
+import { toast } from "react-toastify";
+import newRequest from "../helper/newRequest";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -108,21 +110,56 @@ const SmallBtn = styled.div`
 `;
 
 function ForgotPassword() {
+  const [email, setEmail] = useState("");
+
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleReset = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+    setEmail({ email: "" });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // check fields
+    if (isEmpty(email)) return toast.error("Please fill in all fields.");
+    // check email
+    if (!isEmail(email))
+      return toast.error("Please enter a valid email address.");
+    try {
+      await newRequest.post("auth/forgot/email", { email });
+      handleReset();
+      return toast.success("Please check your email 📧");
+    } catch (err) {
+      toast.error(err.response.data);
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
         <Logo>Fiver-clone</Logo>
         <Tittle>Enter your email address</Tittle>
         <FormContainer1>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <LabelContainer>
               <Label htmlFor="email">Email address</Label>
               {/* <InputContainer> */}
-              <Input type="email" name="email" autoComplete="email" required />
+              <Input
+                type="email"
+                name="email"
+                autoComplete="email"
+                required
+                onChange={handleChange}
+              />
               {/* </InputContainer> */}
             </LabelContainer>
+            <Button type="submit">submit</Button>
           </Form>
-          <Button type="submit">submit</Button>
           <ButtonContainer>
             <Link to="/login">
               <SmallBtn type="submit">Sign in</SmallBtn>

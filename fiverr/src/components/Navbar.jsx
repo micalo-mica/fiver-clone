@@ -358,6 +358,9 @@ function Navbar() {
                 <Link onClick={handleLogout}>
                   <Options>Logout</Options>
                 </Link>
+                <Link to="/forgotPassword">
+                  <Options>Forgot Password</Options>s
+                </Link>
               </ProfileOptions>
             )}
           </ProfileContainer>

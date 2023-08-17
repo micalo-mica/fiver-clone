@@ -1,7 +1,13 @@
 import styled from "styled-components";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/authContext";
+import { toast } from "react-toastify";
+import newRequest from "../helper/newRequest";
+import { isEmpty, isLength, isMatch } from "../helper/validate";
+import { useEffect } from "react";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -124,13 +130,75 @@ const SmallBtn = styled.div`
 
 function PutNewPassword() {
   const [visible, setVisible] = useState(false);
+  const [token, setToken] = useState("");
+
+  const navigate = useNavigate();
+
+  const [userInfo, setUserInfo] = useState({
+    password: "",
+    cf_password: "",
+  });
+
+  // get token
+  useEffect(() => {
+    const urlToken = window.location.search.split("=")[1];
+    setToken(urlToken);
+  }, []);
+
+  const { dispatch } = useContext(AuthContext);
+
+  const { password, cf_password } = userInfo;
+
+  const handleChange = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
+
+  const handleReset = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+    setUserInfo({ ...userInfo, password: "", cf_password: "" });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // check fields
+    if (!token) return toast.error("No token");
+    // check fields
+    if (isEmpty(password) || isEmpty(cf_password))
+      return toast.error("Please fill in all fields.");
+    //check password length
+    if (isLength(password))
+      return toast.error("Password must be at least 6 characters.");
+    // password match
+    if (!isMatch(password, cf_password))
+      return toast.error("Password did not match");
+    try {
+      const res = await newRequest.post("auth/forgot/newPassword", {
+        password,
+        token,
+      });
+      // check if it was successful and redirect the user
+      if (res.data.success === true) {
+        navigate("/login");
+        await newRequest.post("auth/logout/logoutUser");
+        dispatch({ type: "LOGOUT" });
+        toast.success("Login again please 🤗");
+      }
+      handleReset();
+      return toast.success("Password was successfully changed 🤗");
+    } catch (error) {
+      toast.error(error.response.data);
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
         <Logo>Fiver-clone</Logo>
         <Tittle>Enter your new password</Tittle>
         <FormContainer1>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <LabelContainer>
               {/* password */}
               <Label htmlFor="email">Password</Label>
@@ -138,8 +206,8 @@ function PutNewPassword() {
                 <Input
                   type={visible ? "text" : "password"}
                   name="password"
-                  autoComplete="current-password"
                   required
+                  onChange={handleChange}
                 />
                 {visible ? (
                   <IconVisible onClick={() => setVisible(false)} />
@@ -154,9 +222,9 @@ function PutNewPassword() {
               <InputContainer rel="relative">
                 <Input
                   type={visible ? "text" : "password"}
-                  name="confirm-password"
-                  autoComplete="current-password"
+                  name="cf_password"
                   required
+                  onChange={handleChange}
                 />
                 {visible ? (
                   <IconVisible onClick={() => setVisible(false)} />
@@ -165,8 +233,8 @@ function PutNewPassword() {
                 )}
               </InputContainer>
             </LabelContainer>
+            <Button type="submit">submit</Button>
           </Form>
-          <Button type="submit">submit</Button>
           <ButtonContainer>
             <Link to="/forgotPassword">
               <SmallBtn type="submit">forgot password</SmallBtn>
