@@ -154,7 +154,7 @@ const Register = () => {
       });
       toast.success(res.data.msg);
     } catch (error) {
-      toast.error(error.response.data.msg);
+      toast.error(error.response.data);
     }
     handleReset();
   };

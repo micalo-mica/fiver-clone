@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { isEmpty, isEmail, isLength, isMatch } from "../helper/validate";
+import newRequest from "../helper/newRequest";
+import { toast } from "react-toastify";
+import { AuthContext } from "../context/authContext";
+import { useContext } from "react";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -119,18 +124,40 @@ const SmallBtn = styled.div`
 `;
 
 const Login = () => {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [userInfo, setUserInfo] = useState({
-    email: undefined,
-    password: undefined,
+    email: "",
+    password: "",
   });
 
+  const { dispatch } = useContext(AuthContext);
+
+  const { email, password } = userInfo;
+
   const handleChange = (e) => {
-    setUserInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
+    // check fields
+    if (isEmpty(email) || isEmpty(password))
+      return toast.error("Please fill in all fields.");
+    // check email
+    if (!isEmail(email))
+      return toast.error("Please enter a valid email address.");
+    try {
+      const res = await newRequest.post("auth/login/loginUser", {
+        email,
+        password,
+      });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.info });
+      navigate("/");
+    } catch (error) {
+      toast.error(error.response.data);
+    }
   };
 
   return (
@@ -139,7 +166,7 @@ const Login = () => {
         <Logo>Fiver-clone</Logo>
         <Tittle>Sign In</Tittle>
         <FormContainer1>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <LabelContainer>
               <Label htmlFor="email">Email address</Label>
               <Input
@@ -147,7 +174,7 @@ const Login = () => {
                 name="email"
                 autoComplete="email"
                 required
-                onchange={handleChange}
+                onChange={handleChange}
               />
             </LabelContainer>
             <LabelContainer>
@@ -159,7 +186,7 @@ const Login = () => {
                   name="password"
                   autoComplete="current-password"
                   required
-                  onchange={handleChange}
+                  onChange={handleChange}
                 />
                 {visible ? (
                   <IconVisible onClick={() => setVisible(false)} />
