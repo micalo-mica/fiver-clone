@@ -20,7 +20,7 @@ router.post("/register/activateUser", activateUser);
 router.post("/login/loginUser", login);
 
 // For logout a user
-router.post("/logout/logout-user", logout);
+router.post("/logout/logoutUser", logout);
 
 // For a user forgot password
 router.post("/forgot/email", forgot);
