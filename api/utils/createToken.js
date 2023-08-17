@@ -7,5 +7,5 @@ export const activation = (payload) => {
 };
 
 export const forgotToken = (payload) => {
-  return jwt.sign(payload, process.env.ACCESS_TOKEN, { expiresIn: "15m" });
+  return jwt.sign(payload, process.env.ACCESS_TOKEN, { expiresIn: "50m" });
 };

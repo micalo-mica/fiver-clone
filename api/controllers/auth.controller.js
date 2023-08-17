@@ -72,7 +72,6 @@ export const activateUser = async (req, res, next) => {
     const newUser = jwt.verify(token, process.env.ACTIVATION_TOKEN);
 
     const { name, email, password } = newUser;
-    console.log(name, email, password);
 
     if (!newUser) {
       return next(createError(400, "Invalid token"));
@@ -121,7 +120,6 @@ export const login = async (req, res, next) => {
       );
 
     // compare password
-    // const isCorrect = bcrypt.compareSync(password, user.dbPassword);
     const isPasswordCorrect = await bcrypt.compare(password, user.dbPassword);
 
     if (!isPasswordCorrect)
@@ -129,7 +127,6 @@ export const login = async (req, res, next) => {
 
     const { dbPassword, ...info } = user._doc;
 
-    console.log(user);
     // sign jwt token to the user
     const token = jwt.sign({ ...info }, process.env.JWT_KEY);
 
@@ -182,7 +179,7 @@ export const forgot = async (req, res, next) => {
       return next(createError(400, "Please provide the correct email!"));
 
     // create ac token
-    const forgot_token = forgotToken({ id: user.id });
+    const forgot_token = forgotToken({ id: user._id });
 
     // send email
     const url = `${DOMAIN}/putNewPassword?token=${forgot_token}`;
@@ -206,10 +203,10 @@ export const forgot = async (req, res, next) => {
 export const reset = async (req, res, next) => {
   try {
     // get password
-    const { UserPassword, forgot_token } = req.body;
+    const { password, token } = req.body;
 
     // verify the token
-    const newUser = jwt.verify(forgot_token, process.env.ACCESS_TOKEN);
+    const newUser = jwt.verify(token, process.env.ACCESS_TOKEN);
     if (!newUser) {
       return next(createError(400, "Invalid token"));
     }
@@ -219,11 +216,11 @@ export const reset = async (req, res, next) => {
 
     // hash password
     const salt = await bcrypt.genSalt();
-    const hashPassword = await bcrypt.hash(UserPassword, salt);
+    const hashPassword = await bcrypt.hash(password, salt);
 
     // update password
     await User.findByIdAndUpdate(req.userId, {
-      $set: { password: hashPassword },
+      $set: { dbPassword: hashPassword },
     });
 
     // reset success

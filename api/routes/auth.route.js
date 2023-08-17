@@ -7,6 +7,7 @@ import {
   forgot,
   reset,
 } from "../controllers/auth.controller.js";
+import { verifyToken } from "../middleware/jwt.js";
 
 const router = express.Router();
 
@@ -26,6 +27,6 @@ router.post("/logout/logoutUser", logout);
 router.post("/forgot/email", forgot);
 
 // For a user reset password
-router.post("/forgot/new-password", reset);
+router.post("/forgot/newPassword", verifyToken, reset);
 
 export default router;
