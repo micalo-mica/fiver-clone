@@ -17,7 +17,7 @@ router.post("/register", register);
 router.post("/register/activateUser", activateUser);
 
 // For login a user
-router.post("/login/login-user", login);
+router.post("/login/loginUser", login);
 
 // For logout a user
 router.post("/logout/logout-user", logout);

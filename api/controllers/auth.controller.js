@@ -89,7 +89,7 @@ export const activateUser = async (req, res, next) => {
     const user = new User({
       name,
       email,
-      password,
+      dbPassword: password,
     });
     await user.save();
 
@@ -106,9 +106,9 @@ export const activateUser = async (req, res, next) => {
 export const login = async (req, res, next) => {
   try {
     // get use credential
-    const { email, UserPassword } = req.body;
+    const { email, password } = req.body;
 
-    if (!email || !UserPassword) {
+    if (!email || !password) {
       return next(createError(400, "Please provide the all fields!"));
     }
 
@@ -121,20 +121,17 @@ export const login = async (req, res, next) => {
       );
 
     // compare password
-    const isCorrect = bcrypt.compareSync(UserPassword, user.password);
+    // const isCorrect = bcrypt.compareSync(password, user.dbPassword);
+    const isPasswordCorrect = await bcrypt.compare(password, user.dbPassword);
 
-    if (!isCorrect)
+    if (!isPasswordCorrect)
       return next(createError(400, "Please provide the correct information!"));
 
-    // sign jwt token to the user
-    const token = jwt.sign(
-      {
-        id: user._id,
-      },
-      process.env.JWT_KEY
-    );
+    const { dbPassword, ...info } = user._doc;
 
-    const { password, ...info } = user._doc;
+    console.log(user);
+    // sign jwt token to the user
+    const token = jwt.sign({ ...info }, process.env.JWT_KEY);
 
     // send cookie
     res
